@@ -5,18 +5,42 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author salah
  */
-public class Country {
+@Entity
+@Table(name = "Countries")
+public class Country implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "country-id")
     private long countryID;
+
     private String countryName;
 
-    private List<City> cities;
+    @OneToMany(fetch = FetchType.EAGER,targetEntity = Governorate.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id")
+    private List<Governorate> governorates;
+
+    public Country() {
+        governorates = new ArrayList<>();
+    }
 
     /**
      * @return the countryID
@@ -47,17 +71,17 @@ public class Country {
     }
 
     /**
-     * @return the cities
+     * @return the governorates
      */
-    public List<City> getCities() {
-        return cities;
+    public List<Governorate> getGovernorates() {
+        return governorates;
     }
 
     /**
-     * @param cities the cities to set
+     * @param governorates the governorates to set
      */
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setGovernorates(List<Governorate> governorates) {
+        this.governorates = governorates;
     }
 
 }

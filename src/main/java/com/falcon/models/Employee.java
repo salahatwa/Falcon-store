@@ -5,16 +5,29 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
 import java.sql.Blob;
 import javafx.scene.image.Image;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author salah
  */
-public class Employee {
+@Entity
+@Table(name = "Employees")
+public class Employee implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "employee-id")
     private long employeeID;
+    
     private String fullName;
     private String emailAddress;
     private String address;

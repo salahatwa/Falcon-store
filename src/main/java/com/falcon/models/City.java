@@ -5,13 +5,27 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author salah
  */
-public class City {
+@Entity
+@Table(name = "Cities")
+public class City implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "city-id")
     private long cityID;
+    
     private String cityName;
 
     /**

@@ -5,25 +5,38 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author salah
  */
-public class Product {
+@Entity
+@Table(name = "products")
+public class Product implements Serializable {
 
-    private long   productID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "product-id")
+    private long productID;
+
     private String productName;
 
-    private String quantity;
+    private int quantity;
+
+    private String category;
+
+    private double productPrice;
+
+    private double productDiscountPrice;
+
     private String description;
-
-    private String catagory;
-
-    private String pursesPrice;
-    private String sellPrice;
-    private String discountInCash;
-    private String discountInPersent;
-
 
     private String storeDate;
 
@@ -58,14 +71,14 @@ public class Product {
     /**
      * @return the quantity
      */
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -84,78 +97,6 @@ public class Product {
     }
 
     /**
-     * @return the catagory
-     */
-    public String getCatagory() {
-        return catagory;
-    }
-
-    /**
-     * @param catagory the catagory to set
-     */
-    public void setCatagory(String catagory) {
-        this.catagory = catagory;
-    }
-
-    /**
-     * @return the pursesPrice
-     */
-    public String getPursesPrice() {
-        return pursesPrice;
-    }
-
-    /**
-     * @param pursesPrice the pursesPrice to set
-     */
-    public void setPursesPrice(String pursesPrice) {
-        this.pursesPrice = pursesPrice;
-    }
-
-    /**
-     * @return the sellPrice
-     */
-    public String getSellPrice() {
-        return sellPrice;
-    }
-
-    /**
-     * @param sellPrice the sellPrice to set
-     */
-    public void setSellPrice(String sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    /**
-     * @return the discountInCash
-     */
-    public String getDiscountInCash() {
-        return discountInCash;
-    }
-
-    /**
-     * @param discountInCash the discountInCash to set
-     */
-    public void setDiscountInCash(String discountInCash) {
-        this.discountInCash = discountInCash;
-    }
-
-    /**
-     * @return the discountInPersent
-     */
-    public String getDiscountInPersent() {
-        return discountInPersent;
-    }
-
-    /**
-     * @param discountInPersent the discountInPersent to set
-     */
-    public void setDiscountInPersent(String discountInPersent) {
-        this.discountInPersent = discountInPersent;
-    }
-
-    
-
-    /**
      * @return the storeDate
      */
     public String getStoreDate() {
@@ -167,5 +108,47 @@ public class Product {
      */
     public void setStoreDate(String storeDate) {
         this.storeDate = storeDate;
+    }
+
+    /**
+     * @return the category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * @return the productPrice
+     */
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    /**
+     * @param productPrice the productPrice to set
+     */
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    /**
+     * @return the productDiscountPrice
+     */
+    public double getProductDiscountPrice() {
+        return productDiscountPrice;
+    }
+
+    /**
+     * @param productDiscountPrice the productDiscountPrice to set
+     */
+    public void setProductDiscountPrice(double productDiscountPrice) {
+        this.productDiscountPrice = productDiscountPrice;
     }
 }

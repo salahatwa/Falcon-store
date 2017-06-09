@@ -5,21 +5,48 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author salah
  */
-public class Customer {
+@Entity
+@Table(name = "Customers")
+public class Customer implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "customer-id")
     private long customerID;
+
     private String customerName;
     private String customerPhone;
     private String customerAddress;
-    private Country country;
-    private City city;
-    private Specialty specialty;
-    private Category category;
     private String signUpDate;
+
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = City.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = Specialty.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "specialty_id")
+    private Specialty specialty;
+
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = Category.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     /**
      * @return the customerID
@@ -77,19 +104,7 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    /**
-     * @return the country
-     */
-    public Country getCountry() {
-        return country;
-    }
-
-    /**
-     * @param country the country to set
-     */
-    public void setCountry(Country country) {
-        this.country = country;
-    }
+   
 
     /**
      * @return the city

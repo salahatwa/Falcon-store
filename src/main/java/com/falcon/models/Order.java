@@ -5,22 +5,45 @@
  */
 package com.falcon.models;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author salah
  */
-public class Order {
+@Entity
+@Table(name = "Orders")
+public class Order implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "order-id")
     private long orderID;
 
     private int quantity;
-    
+
     private double sellPrice;
 
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Product.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private Product product;
 
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Customer.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Employee.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     /**
